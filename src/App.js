@@ -1,25 +1,77 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Login from './Component/Login';
+import SignUp from './Component/SignUp';
+import Homepage from './Component/HomePage';
+import '@fortawesome/fontawesome-free/css/all.min.css'; 
+import 'bootstrap-css-only/css/bootstrap.min.css'; 
+import'mdbreact/dist/css/mdb.css';
+import ProfileSettings from './Component/ProfileSettings';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+class App extends React.Component {
+  
+  constructor(props){
+    super(props)
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      this.state = {
+        isLogin:false
+      }
+  }
+  
+  
+  render(){
+    let isLogin;
+    if(this.state.isLogin){
+      isLogin = 
+        <>
+          <Router>
+            <Switch>
+            <Route exact path="/">
+              {/* <Login /> */}
+                <Homepage/>
+            </Route>
+            <Route path="/signup">
+              <SignUp />
+            </Route>
+            <Route path="/profilesettings">
+              <ProfileSettings />
+            </Route>
+          </Switch>
+        </Router>
+        </>
+      
+    }else{
+      isLogin = 
+        <>
+        <Router>
+          <Switch>
+          <Route exact path="/">
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <SignUp />
+          </Route>
+        </Switch>
+      </Router>
+
+
+      </>
+    
+    }
+   return(
+      <>
+      {isLogin}
+      </>
+   );
+   
+      
+  }
+  
+  
 }
 
 export default App;
