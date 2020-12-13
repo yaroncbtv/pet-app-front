@@ -6,6 +6,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css'; 
 import'mdbreact/dist/css/mdb.css';
 import ProfileSettings from './Component/ProfileSettings';
+import MyPetsPage from './Component/MyPetsPage';
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,7 +19,7 @@ class App extends React.Component {
     super(props)
 
       this.state = {
-        isLogin:false
+        isLogin:true
       }
   }
   
@@ -38,6 +39,9 @@ class App extends React.Component {
             </Route>
             <Route path="/profilesettings">
               <ProfileSettings />
+            </Route>
+            <Route path="/MyPetsPage">
+              <MyPetsPage />
             </Route>
           </Switch>
         </Router>

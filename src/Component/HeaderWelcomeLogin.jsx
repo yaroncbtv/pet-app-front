@@ -101,11 +101,13 @@ const useStyles = theme => ({
             userName:'Yaron',
             lastName:'Cohen',
             LinkMyPetsPage: false,
-            profileSettings: false
+            profileSettings: false,
+            homePage: false
         }
 
         this.LinkMyPetsPage = this.LinkMyPetsPage.bind(this);
         this.profileSettings = this.profileSettings.bind(this);
+        this.homePage = this.homePage.bind(this);
 
     }
     LinkMyPetsPage(){
@@ -119,7 +121,11 @@ const useStyles = theme => ({
       let path = `profilesettings`;
       this.props.history.push(path);
     }
-
+    homePage(){
+      this.setState({homePage:true})
+      let path = ``;
+      this.props.history.push(path);
+    }
 
     render(){
         const { classes } = this.props;
@@ -171,10 +177,13 @@ const useStyles = theme => ({
                   </div>
                   <Divider />
                   <List style={{width:'250px'}}>
+                 
+                  <ListItem button>
+                      <ListItemText onClick={this.homePage} style={{textAlign:'center'}} primary={'Home Page'}/>
+                  </ListItem>
+
                   <ListItem button>
                       <ListItemText onClick={this.LinkMyPetsPage} style={{textAlign:'center'}} primary={'My Pets Page'}/>
-                      
-
                   </ListItem>
                   <ListItem button >
                       <ListItemText onClick={this.profileSettings} style={{textAlign:'center'}} primary={'Profile Settings '}/>
