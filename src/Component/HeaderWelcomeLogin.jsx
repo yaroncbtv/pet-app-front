@@ -16,7 +16,9 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import React, { useState } from 'react';
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
-
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch1 from '@material-ui/core/Switch';
 import {
   BrowserRouter as Router,
   Switch,
@@ -98,8 +100,8 @@ const useStyles = theme => ({
 
         this.state = {
             manuOpenClose: false,
-            userName:'Yaron',
-            lastName:'Cohen',
+            userName:'User',
+            lastName:'User',
             LinkMyPetsPage: false,
             profileSettings: false,
             homePage: false
@@ -146,6 +148,7 @@ const useStyles = theme => ({
                   <Typography className={classes.title} variant="h6" noWrap>
                     Welcome: {this.state.userName + ' ' + this.state.lastName} 
                   </Typography>
+                  
                   <div className={classes.search}>
                     <div className={classes.searchIcon}>
                       <SearchIcon />
@@ -158,7 +161,13 @@ const useStyles = theme => ({
                       }}
                       inputProps={{ 'aria-label': 'search' }}
                     />
+                    
                   </div>
+                  <FormControlLabel
+                      control={<Switch1 name="checkedA" />}
+                      label="Advanced Search"
+                      style={{margin:'0px'}}
+                    />
                 </Toolbar>
               </AppBar>
       
