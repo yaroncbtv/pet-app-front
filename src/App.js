@@ -19,10 +19,15 @@ class App extends React.Component {
     super(props)
 
       this.state = {
-        isLogin:true
+        isLogin:false
       }
+      this.loginSate = this.loginSate.bind(this);
+
   }
-  
+  loginSate(data){
+    if(data.emailIsEqual && data.passwordIsEqual)
+        this.setState({isLogin:true})
+  }
   render(){
     let isLogin;
     if(this.state.isLogin){
@@ -53,7 +58,7 @@ class App extends React.Component {
         <Router>
           <Switch>
           <Route exact path="/">
-            <Login />
+            <Login loginSate = {this.loginSate}/>
           </Route>
           <Route path="/signup">
             <SignUp />
