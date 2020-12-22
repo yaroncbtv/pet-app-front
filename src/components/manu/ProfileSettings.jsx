@@ -15,14 +15,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { fade, withStyles  } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
-import HeaderWelcomeLogin from './HeaderWelcomeLogin';
 
 function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
         <Link color="inherit" href="https://material-ui.com/">
-          Your Website
+        YC-Developer
+
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}
@@ -60,7 +60,6 @@ class ProfileSettings extends React.Component{
         const { classes } = this.props;
         return(
             <>
-            <HeaderWelcomeLogin/>
         <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>

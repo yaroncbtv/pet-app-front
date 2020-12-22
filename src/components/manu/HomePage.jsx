@@ -1,6 +1,5 @@
 import React from 'react';
-import HeaderWelcomeLogin from './HeaderWelcomeLogin';
-import ProfileSettings from './ProfileSettings';
+import ProfileSettings from '../manu/ProfileSettings';
 import Cards from './Cards';
 import {
     BrowserRouter as Router,
@@ -21,16 +20,14 @@ export default class HomePage extends React.Component{
         
         return(
             <>
-                
-                <HeaderWelcomeLogin/>
-                <Container style={{display:'flex',flexWrap: 'wrap', justifyContent:'center'}}>
+                <div style={{display:'flex',flexWrap: 'wrap', justifyContent:'center'}}>
                     <Cards/>
                     <Cards/>
                     <Cards/>
                     <Cards/>
                     <Cards/>
                     <Cards/>
-                </Container>
+                </div>
             </>
         )
     }

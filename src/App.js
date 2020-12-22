@@ -1,85 +1,69 @@
-import React from 'react'
-import Login from './Component/Login';
-import SignUp from './Component/SignUp';
-import Homepage from './Component/HomePage';
-import '@fortawesome/fontawesome-free/css/all.min.css'; 
-import 'bootstrap-css-only/css/bootstrap.min.css'; 
-import'mdbreact/dist/css/mdb.css';
-import ProfileSettings from './Component/ProfileSettings';
-import MyPetsPage from './Component/MyPetsPage';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-class App extends React.Component {
-  
-  constructor(props){
-    super(props)
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Axios from "axios";
+import Header from "./components/layout/Header";
+import Home from "./components/pages/Home";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import UserContext from "./context/UserContext";
+import ProfileSettings from './components/manu/ProfileSettings'
+import MyPetsPage from './components/manu/MyPetsPage'
+import "./style.css";
+import Container from '@material-ui/core/Container';
 
-      this.state = {
-        isLogin:false
+export default function App() {
+  const [userData, setUserData] = useState({
+    token: undefined,
+    user: undefined,
+  });
+
+  useEffect(() => {
+    const checkLoggedIn = async () => {
+      let token = localStorage.getItem("auth-token");
+      if (token === null) {
+        localStorage.setItem("auth-token", "");
+        token = "";
       }
-      this.loginSate = this.loginSate.bind(this);
+      const tokenRes = await Axios.post(
+        "http://localhost:5000/users/tokenIsValid",
+        null,
+        { headers: { "x-auth-token": token } }
+      );
+      if (tokenRes.data) {
+        const userRes = await Axios.get("http://localhost:5000/users/", {
+          headers: { "x-auth-token": token },
+        });
+        setUserData({
+          token,
+          user: userRes.data,
+        });
+      }
+    };
 
-  }
-  loginSate(data){
-    if(data.emailIsEqual && data.passwordIsEqual)
-        this.setState({isLogin:true})
-  }
-  render(){
-    let isLogin;
-    if(this.state.isLogin){
-      isLogin = 
-        <>
-          <Router>
+    checkLoggedIn();
+  }, []);
+
+  return (
+    <>
+      <BrowserRouter>
+        <UserContext.Provider value={{ userData, setUserData }}>
+          <Header />
+          <Container>
             <Switch>
-            <Route exact path="/">
-              {/* <Login /> */}
-                <Homepage/>
-            </Route>
-            <Route path="/signup">
-              <SignUp />
-            </Route>
-            <Route path="/profilesettings">
+              <Route exact path="/" component={Home} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+              <Route path="/profilesettings">
               <ProfileSettings />
             </Route>
-            <Route path="/MyPetsPage">
+            <Route path="/mypetspage">
               <MyPetsPage />
             </Route>
-          </Switch>
-        </Router>
-        </>
-      
-    }else{
-      isLogin = 
-        <>
-        <Router>
-          <Switch>
-          <Route exact path="/">
-            <Login loginSate = {this.loginSate}/>
-          </Route>
-          <Route path="/signup">
-            <SignUp />
-          </Route>
-        </Switch>
-      </Router>
-
-
-      </>
-    
-    }
-   return(
-      <>
-      {isLogin}
-      </>
-   );
-   
-      
-  }
-  
-  
+            
+            </Switch>
+          </Container>
+        </UserContext.Provider>
+      </BrowserRouter>
+    </>
+  );
 }
-
-export default App;
