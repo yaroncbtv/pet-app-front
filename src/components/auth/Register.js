@@ -57,16 +57,18 @@ export default function Register() {
   const [password, setPassword] = useState();
   const [passwordCheck, setPasswordCheck] = useState();
   const [displayName, setDisplayName] = useState();
+  const [lastName, setLastName] = useState();
+  const [phone, setPhone] = useState();
   const [error, setError] = useState();
 
   const { setUserData } = useContext(UserContext);
   const history = useHistory();
-
+  const login = () => history.push("/login");
   const submit = async (e) => {
     e.preventDefault();
 
     try {
-      const newUser = { email, password, passwordCheck, displayName };
+      const newUser = { email, password, passwordCheck, displayName ,lastName, phone};
       await Axios.post("http://localhost:5000/users/register", newUser);
       const loginRes = await Axios.post("http://localhost:5000/users/login", {
         email,
@@ -84,8 +86,8 @@ export default function Register() {
   };
 
   const classes = useStyles();
-
   return (
+    
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -93,25 +95,25 @@ export default function Register() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Signup
         </Typography>
         <form onSubmit={submit} className={classes.form} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fname"
-                name="Display Name"
+                name="First Name"
                 variant="outlined"
                 required
                 fullWidth
                 id="register-display-name"
-                label="Display Name"
+                label="First Name"
                 autoFocus
                 type="text"
                 onChange={(e) => setDisplayName(e.target.value)}
               />
             </Grid>
-            {/* <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
                 required
@@ -120,8 +122,21 @@ export default function Register() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                onChange={(e) => setLastName(e.target.value)}
               />
-            </Grid> */}
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="phone"
+                label="Phone"
+                name="Phone"
+                autoComplete="phone"
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -170,11 +185,11 @@ export default function Register() {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            SignUp
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link onClick={login} variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
@@ -189,42 +204,4 @@ export default function Register() {
       </Box>
     </Container>
   );
-
-  // return (
-  //   <div className="page">
-  //     <h2>Register</h2>
-  //     {error && (
-  //       <ErrorNotice message={error} clearError={() => setError(undefined)} />
-  //     )}
-  //     <form className="form" onSubmit={submit}>
-  //       <label htmlFor="register-email">Email</label>
-  //       <input
-  //         id="register-email"
-  //         type="email"
-  //         onChange={(e) => setEmail(e.target.value)}
-  //       />
-
-  //       <label htmlFor="register-password">Password</label>
-  //       <input
-  //         id="register-password"
-  //         type="password"
-  //         onChange={(e) => setPassword(e.target.value)}
-  //       />
-  //       <input
-  //         type="password"
-  //         placeholder="Verify password"
-  //         onChange={(e) => setPasswordCheck(e.target.value)}
-  //       />
-
-  //       <label htmlFor="register-display-name">Display name</label>
-  //       <input
-  //         id="register-display-name"
-  //         type="text"
-  //         onChange={(e) => setDisplayName(e.target.value)}
-  //       />
-
-  //       <input type="submit" value="Register" />
-  //     </form>
-  //   </div>
-  // );
 }

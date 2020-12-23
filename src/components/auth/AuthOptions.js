@@ -57,7 +57,12 @@ const useStyles = makeStyles((theme) => ({
       display: 'block',
     },
   },
-
+  test: {
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
+  },
+ 
   searchIcon: {
     padding: theme.spacing(0, 2),
     height: '100%',
@@ -183,7 +188,7 @@ export default function AuthOptions() {
           {userData.user ? (
         <>
         <Typography className={classes.title} variant="h6" noWrap>
-        <span>Welcome {userData.user.displayName}</span>
+        <span>Welcome {userData.user.displayName + ' ' + userData.user.lastName}</span>
         </Typography>
         </>
       ) : (
@@ -212,9 +217,9 @@ export default function AuthOptions() {
           </div>
           <FormControlLabel
                       control={<Switch1 name="checkedA" />}
-                      label="Advanced Search"
                       style={{margin:'0px'}}
                     />
+                    <span className={classes.test}>Advanced Search</span>
         </>
       ) : (
         <>
@@ -227,7 +232,7 @@ export default function AuthOptions() {
         <Button size="small" style={{marginLeft:'10px'}} onClick={logout} variant="contained" color="secondary">Logout</Button>
       ) : (
         <>
-                  <Button size="small" style={{marginLeft:'10px'}} onClick={register} variant="contained" color="secondary">Register</Button>
+                  <Button size="small" style={{marginLeft:'10px'}} onClick={register} variant="contained" color="secondary">Signup</Button>
                   <Button size="small" style={{marginLeft:'10px'}} onClick={login} variant="contained" color="secondary">Login</Button>
 
           
@@ -237,20 +242,4 @@ export default function AuthOptions() {
       </AppBar>
     </div>
   );
-
-
-
-
-  // return (
-  //   <nav className="auth-options">
-  //     {userData.user ? (
-  //       <button onClick={logout}>Log out</button>
-  //     ) : (
-  //       <>
-  //         <button onClick={register}>Register</button>
-  //         <button onClick={login}>Log in</button>
-  //       </>
-  //     )}
-  //   </nav>
-  // );
 }
