@@ -101,11 +101,22 @@ export default function ProfileSettings() {
     
   }, []);
   
+  const submit = async (e) => {
+    try {
+      const loginUser = { email, displayName, lastName, phone };
+      const loginRes = await Axios.post(
+        "http://localhost:5000/users/update",
+        loginUser
+      );
+    } catch (err) {
+      err.response.data.msg && setError(err.response.data.msg);
+    }
+  };
   
   const classes = useStyles();
   return (
     
-    <Container component="main" maxWidth="xs">
+    <Container className='box' component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -114,7 +125,7 @@ export default function ProfileSettings() {
         <Typography component="h1" variant="h5">
         Profile Settings
         </Typography>
-        <form className={classes.form} noValidate>
+        <form onSubmit={submit} className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField

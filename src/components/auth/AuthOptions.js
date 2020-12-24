@@ -194,7 +194,10 @@ export default function AuthOptions() {
       ) : (
         <>
         <Typography className={classes.titleLogout} variant="h6" noWrap>
-          <span>Pets App</span>
+          <span>
+          <img src='https://www.logolynx.com/images/logolynx/3e/3eec2bcb4f7ab1f14812d1f9d4134895.png' width="40" height="40" style={{borderRadius: '50%',marginRight:'10px'}}></img>
+            Pets App
+            </span>
           </Typography>
         </>
       )}

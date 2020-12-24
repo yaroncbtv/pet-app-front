@@ -88,7 +88,7 @@ export default function Register() {
   const classes = useStyles();
   return (
     
-    <Container component="main" maxWidth="xs">
+    <Container className='box' component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

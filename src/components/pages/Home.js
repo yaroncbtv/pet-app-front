@@ -27,12 +27,13 @@ export default function Home() {
             alignContent:'center'
             
           }}>
+            <h1>Welcome To Pets App</h1>
         <Alert style={{marginBottom:'20px'}} severity="error">
           <AlertTitle>Info</AlertTitle>
           You ate not Login — <strong>lets Login!</strong>
         </Alert>
           
-        <Button variant="contained" color="primary">
+        <Button style={{marginBottom:'20px'}} variant="contained" color="primary">
         <Link style={{color:'white'}} to="/login">Login</Link>
         </Button>
           
