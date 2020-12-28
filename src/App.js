@@ -15,8 +15,14 @@ export default function App() {
   const [userData, setUserData] = useState({
     token: undefined,
     user: undefined,
+    cards:{
+      img: '',
+      petsName: '',
+      petsCurrentStatus: '',
+      seeMoreBtn: '',
+    }
   });
-
+  
   useEffect(() => {
     const checkLoggedIn = async () => {
       let token = localStorage.getItem("auth-token");
@@ -36,6 +42,12 @@ export default function App() {
         setUserData({
           token,
           user: userRes.data,
+          cards:[{
+            img: 'imgURL',
+            petsName: 'dog',
+            petsCurrentStatus: 'true',
+            seeMoreBtn: 'see more',
+          }]
         });
       }
     };

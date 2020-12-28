@@ -8,27 +8,58 @@ import {
     Link
   } from "react-router-dom";
   import { Container } from '@material-ui/core';
+  import UserContext from "../../context/UserContext";
+  import { useState, useEffect ,useContext} from "react";
+  import Axios from "axios";
 
-export default class HomePage extends React.Component{
-    constructor(props) {
-        super(props);
-        
-    }
-    
-    
-    render(){
-        
+export default function HomePage() {
+   let cnt = 0;
+    const { userData, setUserData } = useContext(UserContext);
+    const [usePetsRes, setPetsRes] = useState(null);
+
+    useEffect(() => {
+        const petsData = async () => {
+            const petsRes = await Axios.get("http://localhost:5000/pets/get-pet", {
+            });
+            
+            await setPetsRes(petsRes.data)
+           
+        };
+        petsData();
+      }, []);
+
+      
+        if(usePetsRes){
+            return(
+                <>
+                {console.log(usePetsRes)}
+                <div style={{display:'flex',flexWrap: 'wrap', justifyContent:'center'}}>
+                    {
+                       usePetsRes.map(function(card){
+                            return (<Cards value = {card} key = {cnt++}/>)
+                          })
+                    }
+                </div>
+                </>
+            )
+        }
+
         return(
             <>
-                <div style={{display:'flex',flexWrap: 'wrap', justifyContent:'center'}}>
-                    <Cards/>
-                    <Cards/>
-                    <Cards/>
-                    <Cards/>
-                    <Cards/>
-                    <Cards/>
-                </div>
             </>
         )
-    }
+        // return(
+        //     <>
+        //         <div style={{display:'flex',flexWrap: 'wrap', justifyContent:'center'}}>
+        //             {
+        //                userData.cards.map(function(card){
+        //                     return (<Cards value = {card} key = {cnt++}/>)
+        //                   })
+        //             }
+                    
+                    
+                    
+        //         </div>
+        //     </>
+        // )
 }
