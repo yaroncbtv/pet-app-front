@@ -18,6 +18,7 @@ import Button from '@material-ui/core/Button';
 import Switch1 from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import Axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -104,10 +105,9 @@ export default function AuthOptions() {
       token: undefined,
       user: undefined,
     });
-    localStorage.setItem("auth-token", "");
+    localStorage.setItem("x-auth-token", "");
   };
   const classes = useStyles();
-
   const toggle = () => setDrawer(!drawer);
 
   function LinkMyPetsPage(){
@@ -123,6 +123,7 @@ export default function AuthOptions() {
     let path = ``;
     history.push(path);
   }
+
   return (
     <div className={classes.root}>
             
@@ -187,6 +188,7 @@ export default function AuthOptions() {
           
           {userData.user ? (
         <>
+        
         <Typography className={classes.title} variant="h6" noWrap>
         <span>Welcome {userData.user.displayName + ' ' + userData.user.lastName}</span>
         </Typography>

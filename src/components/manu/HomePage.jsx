@@ -32,7 +32,6 @@ export default function HomePage() {
         if(usePetsRes){
             return(
                 <>
-                {console.log(usePetsRes)}
                 <div style={{display:'flex',flexWrap: 'wrap', justifyContent:'center'}}>
                     {
                        usePetsRes.map(function(card){
@@ -48,18 +47,4 @@ export default function HomePage() {
             <>
             </>
         )
-        // return(
-        //     <>
-        //         <div style={{display:'flex',flexWrap: 'wrap', justifyContent:'center'}}>
-        //             {
-        //                userData.cards.map(function(card){
-        //                     return (<Cards value = {card} key = {cnt++}/>)
-        //                   })
-        //             }
-                    
-                    
-                    
-        //         </div>
-        //     </>
-        // )
 }

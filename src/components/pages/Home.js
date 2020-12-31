@@ -13,7 +13,7 @@ export default function Home() {
       
       {userData.user ? (
         <>
-        <h1>Welcome {userData.user.displayName + ' ' + userData.user.lastName}</h1>
+        {/* <h1>Welcome {userData.user.displayName + ' ' + userData.user.lastName}</h1> */}
         <HomePage/>
         </>
       ) : (
