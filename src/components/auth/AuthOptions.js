@@ -18,7 +18,9 @@ import Button from '@material-ui/core/Button';
 import Switch1 from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import Axios from "axios";
+import PetsContext from "../../context/PetsContext";
+import { getGlobal, resetGlobal, setGlobal, useGlobal } from 'reactn';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -94,9 +96,12 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function AuthOptions() {
+  const { petsDataContext, setPetsDataContext } = useContext(PetsContext);
+  const [ petsDataState, setPetsDataState ] = useState('');
   const { userData, setUserData } = useContext(UserContext);
   const [ drawer, setDrawer ]  = useState(false);
   const history = useHistory();
+  const [ global, setGlobal ] = useGlobal()
 
   const register = () => history.push("/register");
   const login = () => history.push("/login");
@@ -124,7 +129,10 @@ export default function AuthOptions() {
     history.push(path);
   }
 
+  setGlobal({ pets: petsDataState});
+  
   return (
+
     <div className={classes.root}>
             
       <AppBar position="static">
@@ -217,6 +225,7 @@ export default function AuthOptions() {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              onChange={e => setPetsDataState(e.target.value)}
             />
             
           </div>

@@ -1,4 +1,4 @@
-import React, { useState ,useEffect, useContext} from "react";
+import React, { useState , useContext} from "react";
 import UserContext from "../../context/UserContext";
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,12 +16,7 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Alert from '@material-ui/lab/Alert';
-import SaveIcon from '@material-ui/icons/Save';
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
-import Axios from "axios";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -51,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Cards(props) {
-  const { userData, setUserData } = useContext(UserContext);
+  //const { userData, setUserData } = useContext(UserContext);
   
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
@@ -60,28 +55,28 @@ export default function Cards(props) {
   };
   
 
-  const savePetToUser = async (props) =>{ 
+//   const savePetToUser = async (props) =>{ 
     
-    let token = localStorage.getItem("x-auth-token");
-      if (token === null) {
-        localStorage.setItem("x-auth-token", "");
-        token = "";
-      }
+//     let token = localStorage.getItem("x-auth-token");
+//       if (token === null) {
+//         localStorage.setItem("x-auth-token", "");
+//         token = "";
+//       }
     
-    const tokenRes = await Axios.post(
-      "http://localhost:5000/users/tokenIsValid",
-      null,
-      { headers: { "x-auth-token": token } }
-    );
-    if (tokenRes.data) {
-      const userRes = await Axios.post(
-        `http://localhost:5000/pets/pet/${props.value.id}/save`,
-      null,
-      { headers: { "x-auth-token": token } }
-    );
+//     const tokenRes = await Axios.post(
+//       "http://localhost:5000/users/tokenIsValid",
+//       null,
+//       { headers: { "x-auth-token": token } }
+//     );
+//     if (tokenRes.data) {
+//       const userRes = await Axios.post(
+//         `http://localhost:5000/pets/pet/${props.value.id}/save`,
+//       null,
+//       { headers: { "x-auth-token": token } }
+//     );
       
-    }
-}
+//     }
+// }
 
 
   

@@ -1,22 +1,17 @@
 import React from 'react';
-import ProfileSettings from '../manu/ProfileSettings';
 import Cards from './Cards';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
-  import { Container } from '@material-ui/core';
-  import UserContext from "../../context/UserContext";
-  import { useState, useEffect ,useContext} from "react";
-  import Axios from "axios";
+import { getGlobal, resetGlobal, setGlobal, useGlobal } from 'reactn';
+import UserContext from "../../context/UserContext";
+import { useState, useEffect ,useContext} from "react";
+import Axios from "axios";
 
 export default function HomePage() {
    let cnt = 0;
     const { userData, setUserData } = useContext(UserContext);
     const [usePetsRes, setPetsRes] = useState(null);
+    const [ global, setGlobal ] = useGlobal()
 
+    
     useEffect(() => {
         const petsData = async () => {
             const petsRes = await Axios.get("http://localhost:5000/pets/get-pet", {
@@ -27,20 +22,56 @@ export default function HomePage() {
         };
         petsData();
       }, []);
-
       
+        
+      useEffect(() => {
+        
+            const petsData = async () => {
+                const petsRes = await Axios.get(`http://localhost:5000/pets/pet-search/${global.pets}`, {
+                });
+                
+                await setPetsRes(petsRes.data)
+            };
+                if(global.pets !== ""){
+                    petsData();
+                }
+                 
+                 else{
+                    const petsData2 = async () => {
+                        const petsRes = await Axios.get("http://localhost:5000/pets/get-pet", {
+                        });
+                        
+                        await setPetsRes(petsRes.data)
+                       
+                    };
+                    petsData2();
+                 }
+             
+             
+
+          }, [global]);
+      
+      
+       
+        
+        
+      
+      
+       
         if(usePetsRes){
-            return(
-                <>
-                <div style={{display:'flex',flexWrap: 'wrap', justifyContent:'center'}}>
-                    {
-                       usePetsRes.map(function(card){
-                            return (<Cards value = {card} key = {cnt++}/>)
-                          })
-                    }
-                </div>
-                </>
-            )
+                            return(
+                    <>                
+                    <div style={{display:'flex',flexWrap: 'wrap', justifyContent:'center'}}>
+                        {
+                           usePetsRes.pets.map(function(card){
+                                return (<Cards value = {card} key = {cnt++}/>)
+                              })
+                        }
+                    </div>
+                    </>
+                )
+            
+            
         }
 
         return(
