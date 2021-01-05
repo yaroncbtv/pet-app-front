@@ -193,7 +193,7 @@ export default function AuthOptions() {
   
           
           
-          
+          {console.log(userData)}
           {userData.user ? (
         <>
         
