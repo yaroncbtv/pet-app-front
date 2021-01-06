@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { withStyles } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -16,7 +16,55 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Alert from '@material-ui/lab/Alert';
+import Dialog from '@material-ui/core/Dialog';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import CloseIcon from '@material-ui/icons/Close';
+import EditForm from './EditForm';
 
+import SaveIcon from '@material-ui/icons/Save';
+import Button from '@material-ui/core/Button';
+import Axios from "axios";
+const styles = (theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(2),
+  },
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  },
+});
+
+const DialogTitle = withStyles(styles)((props) => {
+  const { children, classes, onClose, ...other } = props;
+  return (
+    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+      <Typography variant="h6">{children}</Typography>
+      {onClose ? (
+        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </MuiDialogTitle>
+  );
+});
+
+const DialogContent = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+}))(MuiDialogContent);
+
+const DialogActions = withStyles((theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1),
+  },
+}))(MuiDialogActions);
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,8 +93,17 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Cards(props) {
-  //const { userData, setUserData } = useContext(UserContext);
-  
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = (props) => {
+    setOpen(true);
+
+    console.log(props)
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
@@ -54,49 +111,75 @@ export default function Cards(props) {
   };
   
 
-//   const savePetToUser = async (props) =>{ 
+  const savePetToUser = async (props) =>{ 
+    console.log(props)
+    // let token = localStorage.getItem("x-auth-token");
+    //   if (token === null) {
+    //     localStorage.setItem("x-auth-token", "");
+    //     token = "";
+    //   }
     
-//     let token = localStorage.getItem("x-auth-token");
-//       if (token === null) {
-//         localStorage.setItem("x-auth-token", "");
-//         token = "";
-//       }
-    
-//     const tokenRes = await Axios.post(
-//       "http://localhost:5000/users/tokenIsValid",
-//       null,
-//       { headers: { "x-auth-token": token } }
-//     );
-//     if (tokenRes.data) {
-//       const userRes = await Axios.post(
-//         `http://localhost:5000/pets/pet/${props.value.id}/save`,
-//       null,
-//       { headers: { "x-auth-token": token } }
-//     );
+    // const tokenRes = await Axios.post(
+    //   "http://localhost:5000/users/tokenIsValid",
+    //   null,
+    //   { headers: { "x-auth-token": token } }
+    // );
+    // if (tokenRes.data) {
+    //   const userRes = await Axios.post(
+    //     `http://localhost:5000/pets/pet/${props.value.id}/save`,
+    //   null,
+    //   { headers: { "x-auth-token": token } }
+    // );
       
-//     }
-// }
-
+    // }
+    // return(
+    //   alert("The Pets is Save to Your Pets Page.")
+    // )
+   
+}
 
   
   if( props.value !== undefined){
-    // let adoptionStatusBtn;
+    let adoptionStatusBtn;
     // if(props.value.adoptionStatus === 'Available'){
-    //   adoptionStatusBtn = <Button
-    //  // onClick={() => savePetToUser(props)}
-    //   variant="contained"
-    //   color="primary"
-    //   size="small"
-    //   className={classes.button}
-    //   startIcon={<SaveIcon />}
-    // >
-    //   Save
-    // </Button>
+      adoptionStatusBtn = <Button
+      onClick={() => handleClickOpen(props)}
+      variant="contained"
+      color="primary"
+      size="small"
+      className={classes.button}
+      
+    >
+      Edit
+    </Button>
     // }else{
     //   adoptionStatusBtn = null;
     // }
     return (
-      <Card className={classes.root}>
+     <>
+      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+          Modal title
+        </DialogTitle>
+        <DialogContent dividers>
+          <Typography gutterBottom>
+            <EditForm {...props}/>
+          </Typography>
+          
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose} color="primary">
+            Save changes
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+
+
+
+
+     
+     <Card className={classes.root}>
         <CardHeader
           avatar={
             <Avatar aria-label="recipe" className={classes.avatar}>
@@ -132,7 +215,7 @@ export default function Cards(props) {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-        {/* {adoptionStatusBtn} */}
+        {adoptionStatusBtn}
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
@@ -172,10 +255,16 @@ export default function Cards(props) {
           </CardContent>
         </Collapse>
       </Card>
+      </>
     );
   }
   return(
     <>
     </>
 )
+
 }
+
+
+
+

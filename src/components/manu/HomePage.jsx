@@ -1,15 +1,13 @@
 import React from 'react';
 import Cards from './Cards';
-import { getGlobal, resetGlobal, setGlobal, useGlobal } from 'reactn';
-import UserContext from "../../context/UserContext";
-import { useState, useEffect ,useContext} from "react";
+import { useGlobal } from 'reactn';
+import { useState, useEffect } from "react";
 import Axios from "axios";
 
 export default function HomePage() {
    let cnt = 0;
-    const { userData, setUserData } = useContext(UserContext);
     const [usePetsRes, setPetsRes] = useState(null);
-    const [ global, setGlobal ] = useGlobal()
+    const [ global ] = useGlobal()
 
     
     useEffect(() => {

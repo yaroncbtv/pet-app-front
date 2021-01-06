@@ -24,7 +24,6 @@ if(userData.user.email === "Admin@Admin.com"){
           <>
           {/* <h1>Welcome {userData.user.displayName + ' ' + userData.user.lastName}</h1> */}
           <HomePage/>
-          {console.log(userData)}
           </>
         ) : (
           <>

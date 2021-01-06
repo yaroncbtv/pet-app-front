@@ -3,12 +3,9 @@ import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
@@ -22,7 +19,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import Cards from '../manu/Cards'
+import CardsAdmin from './CardsAdmin'
 import AllUser from './allUser';
 
 function Copyright() {
@@ -105,8 +102,7 @@ export default function Admin() {
     const [color, setPetsColor] = React.useState('');
     const [bio, setPetsBio] = React.useState('');
     const [hypoallergenic, setPetsHypoallergenic] = React.useState('');
-    const [dietary, setPetsDietary] = React.useState('');
-    const [restrictions, setPetsRestrictions] = React.useState('');
+    const [dietaryRestrictions, setDietaryRestrictions] = React.useState('');
     const [breed, setPetsBreed] = React.useState('');
     let cnt = 0;
     useEffect(() => {
@@ -140,8 +136,7 @@ export default function Admin() {
                 color,
                 bio,
                 hypoallergenic,
-                dietary,
-                restrictions,
+                dietaryRestrictions,
                 breed
             });
         e.preventDefault();
@@ -245,7 +240,7 @@ export default function Admin() {
                 required
                 fullWidth
                 id="picture"
-                label="Picture"
+                label="Picture URL"
                 name="picture"
                 autoComplete="picture"
                 onChange={e => setPetsPicture(e.target.value)}
@@ -260,6 +255,7 @@ export default function Admin() {
                 label="Height"
                 name="height"
                 autoComplete="height"
+                type="number"
                 onChange={e => setPetsHeight(e.target.value)}
               />
             </Grid>
@@ -271,6 +267,7 @@ export default function Admin() {
                 id="weight"
                 label="Weight"
                 name="weight"
+                type="number"
                 autoComplete="weight"
                 onChange={e => setPetsWeight(e.target.value)}
               />
@@ -329,24 +326,11 @@ export default function Admin() {
                 variant="outlined"
                 required
                 fullWidth
-                id="dietary"
-                label="Dietary "
-                name="dietary"
-                autoComplete="dietary"
-                onChange={e => setPetsDietary(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="restrictions"
-                label="Restrictions"
-                name="restrictions"
-                autoComplete="restrictions"
-                onChange={e => setPetsRestrictions(e.target.value)}
-
+                id="DietaryRestrictions"
+                label="Dietary Restrictions "
+                name="DietaryRestrictions"
+                autoComplete="DietaryRestrictions"
+                onChange={e => setDietaryRestrictions(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -388,7 +372,7 @@ export default function Admin() {
                     <div style={{display:'flex',flexWrap: 'wrap', justifyContent:'center'}}>
                         {
                            usePetsRes.pets.map(function(card){
-                                return (<Cards value = {card} key = {cnt++}/>)
+                                return (<CardsAdmin value = {card} key = {cnt++}/>)
                               })
                         }
                     </div>

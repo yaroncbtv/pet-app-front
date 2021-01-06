@@ -18,8 +18,7 @@ import Button from '@material-ui/core/Button';
 import Switch1 from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import PetsContext from "../../context/PetsContext";
-import { getGlobal, resetGlobal, setGlobal, useGlobal } from 'reactn';
+import { setGlobal } from 'reactn';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -96,12 +95,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function AuthOptions() {
-  const { petsDataContext, setPetsDataContext } = useContext(PetsContext);
   const [ petsDataState, setPetsDataState ] = useState('');
   const { userData, setUserData } = useContext(UserContext);
   const [ drawer, setDrawer ]  = useState(false);
   const history = useHistory();
-  const [ global, setGlobal ] = useGlobal()
 
   const register = () => history.push("/register");
   const login = () => history.push("/login");
@@ -193,7 +190,6 @@ export default function AuthOptions() {
   
           
           
-          {console.log(userData)}
           {userData.user ? (
         <>
         
@@ -205,7 +201,7 @@ export default function AuthOptions() {
         <>
         <Typography className={classes.titleLogout} variant="h6" noWrap>
           <span>
-          <img src='https://www.logolynx.com/images/logolynx/3e/3eec2bcb4f7ab1f14812d1f9d4134895.png' width="40" height="40" style={{borderRadius: '50%',marginRight:'10px'}}></img>
+          <img alt = "img" src='https://www.logolynx.com/images/logolynx/3e/3eec2bcb4f7ab1f14812d1f9d4134895.png' width="40" height="40" style={{borderRadius: '50%',marginRight:'10px'}}></img>
             Pets App
             </span>
           </Typography>
