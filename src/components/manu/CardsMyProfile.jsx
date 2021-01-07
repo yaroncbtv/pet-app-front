@@ -16,6 +16,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Alert from '@material-ui/lab/Alert';
+import Button from '@material-ui/core/Button';
+import Axios from "axios";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,47 +56,33 @@ export default function Cards(props) {
   };
   
 
-//   const savePetToUser = async (props) =>{ 
+  const deletePetFromUser = async (props) =>{ 
+    console.log(props.value.id)
+    let token = localStorage.getItem("x-auth-token");
+      if (token === null) {
+        localStorage.setItem("x-auth-token", "");
+        token = "";
+      }
     
-//     let token = localStorage.getItem("x-auth-token");
-//       if (token === null) {
-//         localStorage.setItem("x-auth-token", "");
-//         token = "";
-//       }
-    
-//     const tokenRes = await Axios.post(
-//       "http://localhost:5000/users/tokenIsValid",
-//       null,
-//       { headers: { "x-auth-token": token } }
-//     );
-//     if (tokenRes.data) {
-//       const userRes = await Axios.post(
-//         `http://localhost:5000/pets/pet/${props.value.id}/save`,
-//       null,
-//       { headers: { "x-auth-token": token } }
-//     );
+    const tokenRes = await Axios.post(
+      "http://localhost:5000/users/tokenIsValid",
+      null,
+      { headers: { "x-auth-token": token } }
+    );
+    if (tokenRes.data) {
+      const userRes = await Axios.delete(
+        `http://localhost:5000/pets/pet/${props.value.id}/delete`,
       
-//     }
-// }
+      { headers: { "x-auth-token": token } }
+    );
+      
+    }
+    window.location.reload();
+}
 
 
   
   if( props.value !== undefined){
-    // let adoptionStatusBtn;
-    // if(props.value.adoptionStatus === 'Available'){
-    //   adoptionStatusBtn = <Button
-    //  // onClick={() => savePetToUser(props)}
-    //   variant="contained"
-    //   color="primary"
-    //   size="small"
-    //   className={classes.button}
-    //   startIcon={<SaveIcon />}
-    // >
-    //   Save
-    // </Button>
-    // }else{
-    //   adoptionStatusBtn = null;
-    // }
     return (
       <Card className={classes.root}>
         <CardHeader
@@ -132,6 +120,16 @@ export default function Cards(props) {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
+        <Button
+      onClick={() => deletePetFromUser(props)}
+      variant="contained"
+      color="secondary"
+      size="small"
+      className={classes.button}
+      
+    >
+      delete
+    </Button>
         {/* {adoptionStatusBtn} */}
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />

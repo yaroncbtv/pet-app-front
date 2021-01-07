@@ -158,9 +158,9 @@ export default function Cards(props) {
     return (
      <>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Modal title
-        </DialogTitle>
+        {/* <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+          Update Pets
+        </DialogTitle> */}
         <DialogContent dividers>
           <Typography gutterBottom>
             <EditForm {...props}/>
@@ -169,7 +169,7 @@ export default function Cards(props) {
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">
-            Save changes
+            Close
           </Button>
         </DialogActions>
       </Dialog>

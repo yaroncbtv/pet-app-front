@@ -99,21 +99,35 @@ export default function EditForm(props) {
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
     
-    const [type, setPetsType] = React.useState('');
-    const [name, setPetsName] = React.useState('');
-    const [adoptionStatus, setPetsAdoptionStatus] = React.useState('');
-    const [picture, setPetsPicture] = React.useState('');
-    const [height, setPetsHeight] = React.useState('');
-    const [weight, setPetsWeight] = React.useState('');
-    const [color, setPetsColor] = React.useState('');
-    const [bio, setPetsBio] = React.useState('');
-    const [hypoallergenic, setPetsHypoallergenic] = React.useState('');
-    const [dietary, setPetsDietary] = React.useState('');
-    const [restrictions, setPetsRestrictions] = React.useState('');
-    const [breed, setPetsBreed] = React.useState('');
+    const [id, setId] = React.useState(props.value.id);
+    const [type, setPetsType] = React.useState(props.value.type);
+    const [name, setPetsName] = React.useState(props.value.name);
+    const [adoptionStatus, setPetsAdoptionStatus] = React.useState(props.value.adoptionStatus);
+    const [picture, setPetsPicture] = React.useState(props.value.picture);
+    const [height, setPetsHeight] = React.useState(props.value.height);
+    const [weight, setPetsWeight] = React.useState(props.value.weight);
+    const [color, setPetsColor] = React.useState(props.value.color);
+    const [bio, setPetsBio] = React.useState(props.value.bio);
+    const [hypoallergenic, setPetsHypoallergenic] = React.useState(props.value.hypoallergenic);
+    const [dietaryRestrictions, setDietaryRestrictions] = React.useState(props.value.dietaryRestrictions);
+    const [breed, setPetsBreed] = React.useState(props.value.breed);
   
-   function handelSubmit (){
-       console.log(props.value)
+    async function handelSubmit (){
+    const petsRes = await Axios.post("http://localhost:5000/pets/update", {
+      id,
+      type,
+      name,
+      adoptionStatus,
+      picture,
+      height,
+      weight,
+      color,
+      bio,
+      hypoallergenic,
+      dietaryRestrictions,
+      breed
+  });
+    
    }
     
     return (
@@ -127,7 +141,7 @@ export default function EditForm(props) {
               <LockOutlinedIcon />
             </Avatar> */}
             <Typography s component="h1" variant="h5">
-              Add Pets
+              Update Pets
             </Typography>
             <form className={classes.form}>
               <Grid container spacing={2}>
@@ -141,7 +155,7 @@ export default function EditForm(props) {
                     id="type"
                     label="Type"
                     autoFocus
-                    value={props.value.type}
+                    value={type}
                     onChange={e => setPetsType(e.target.value)}
                   />
                 </Grid>
@@ -154,7 +168,7 @@ export default function EditForm(props) {
                     label="Name"
                     name="name"
                     autoComplete="name"
-                    value={props.value.name}
+                    value={name}
                     onChange={e => setPetsName(e.target.value)}
                   />
                 </Grid>
@@ -192,7 +206,7 @@ export default function EditForm(props) {
                     label="Picture URL"
                     name="picture"
                     autoComplete="picture"
-                    value={props.value.picture}
+                    value={picture}
                     onChange={e => setPetsPicture(e.target.value)}
                   />
                 </Grid>
@@ -206,7 +220,7 @@ export default function EditForm(props) {
                     name="height"
                     autoComplete="height"
                     type="number"
-                    value={props.value.height}
+                    value={height}
 
                     onChange={e => setPetsHeight(e.target.value)}
                   />
@@ -221,7 +235,7 @@ export default function EditForm(props) {
                     name="weight"
                     type="number"
                     autoComplete="weight"
-                    value={props.value.weight}
+                    value={weight}
 
                     onChange={e => setPetsWeight(e.target.value)}
                   />
@@ -235,7 +249,7 @@ export default function EditForm(props) {
                     label="Color"
                     name="color"
                     autoComplete="color"
-                    value={props.value.color}
+                    value={color}
 
                     onChange={e => setPetsColor(e.target.value)}
                   />
@@ -249,7 +263,7 @@ export default function EditForm(props) {
                     label="Bio"
                     name="bio"
                     autoComplete="bio"
-                    value={props.value.bio}
+                    value={bio}
 
                     onChange={e => setPetsBio(e.target.value)}
                   />
@@ -288,9 +302,9 @@ export default function EditForm(props) {
                     label="Dietary Restrictions "
                     name="dietaryRestrictions"
                     autoComplete="dietaryRestrictions"
-                    value={props.value.dietaryRestrictions}
+                    value={dietaryRestrictions}
 
-                    onChange={e => setPetsDietary(e.target.value)}
+                    onChange={e => setDietaryRestrictions(e.target.value)}
                   />
                 </Grid>
                 
@@ -303,7 +317,7 @@ export default function EditForm(props) {
                     label="Breed"
                     name="breed"
                     autoComplete="breed"
-                    value={props.value.breed}
+                    value={breed}
 
                     onChange={e => setPetsBreed(e.target.value)}
     
