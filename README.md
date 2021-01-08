@@ -6,7 +6,7 @@
 
 ## NOTE For Login System
 
-     Login as user : just signup
+     Login as User : just signup
      
      Login as Admin :
      Email: Admin@Admin.com
