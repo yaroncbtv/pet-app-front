@@ -6,10 +6,10 @@
 
 ## NOTE For Login System
 
-    `Login as user : just signup
+     Login as user : just signup
      Login as admin :
      Email: Admin@Admin.com
-     Password: Admin`
+     Password: Admin
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
