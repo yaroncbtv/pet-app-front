@@ -8,7 +8,7 @@
 
      Login as user : just signup
      
-     Login as admin :
+     Login as Admin :
      Email: Admin@Admin.com
      Password: Admin
 
