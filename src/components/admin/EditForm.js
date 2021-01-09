@@ -113,7 +113,7 @@ export default function EditForm(props) {
     const [breed, setPetsBreed] = React.useState(props.value.breed);
   
     async function handelSubmit (){
-    const petsRes = await Axios.post("http://localhost:5000/pets/update", {
+    const petsRes = await Axios.post("https://pets-app-server-nodejs.herokuapp.com/pets/update", {
       id,
       type,
       name,

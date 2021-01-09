@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import Button from '@material-ui/core/Button';
 import Admin from '../admin/Admin';
+import Welcome from './Welcome'; 
 
 export default function Home() {
   const { userData } = useContext(UserContext);
@@ -37,8 +38,8 @@ if(userData.user.email === "Admin@Admin.com"){
     }
       return(
         <>
-        <Container>
-            <div className='box' style={{
+        <Container >
+            {/* <div className='box' style={{
               display:'flex',
               flexDirection:'column',
               alignItems:'center',
@@ -46,7 +47,7 @@ if(userData.user.email === "Admin@Admin.com"){
               alignContent:'center'
               
             }}>
-              <h1>Welcome To Pets App</h1>
+              <h1 style={{padding:'20px'}}>Welcome To Pets App</h1>
           <Alert style={{marginBottom:'20px'}} severity="error">
             <AlertTitle>Info</AlertTitle>
             You ate not Login — <strong>lets Login!</strong>
@@ -56,9 +57,9 @@ if(userData.user.email === "Admin@Admin.com"){
           <Link style={{color:'white'}} to="/login">Login</Link>
           </Button>
             
-            </div>
+            </div> */}
           
-            
+            <Welcome/>
             </Container>
         </>
       )

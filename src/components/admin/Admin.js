@@ -107,7 +107,7 @@ export default function Admin() {
     let cnt = 0;
     useEffect(() => {
         const petsData = async () => {
-            const petsRes = await Axios.get("http://localhost:5000/pets/get-pet", {
+            const petsRes = await Axios.get("https://pets-app-server-nodejs.herokuapp.com/pets/get-pet", {
             });
             
             await setPetsRes(petsRes.data)
@@ -116,7 +116,7 @@ export default function Admin() {
         petsData();
 
         const userData = async () => {
-            const usersRes = await Axios.get("http://localhost:5000/all-user", {
+            const usersRes = await Axios.get("https://pets-app-server-nodejs.herokuapp.com/all-user", {
             });
             
             await setUserRes(usersRes.data)
@@ -126,7 +126,7 @@ export default function Admin() {
 
 
     async function handelSubmit(e){
-            const petsRes = await Axios.post("http://localhost:5000/pets/add-pet", {
+            const petsRes = await Axios.post("https://pets-app-server-nodejs.herokuapp.com/pets/add-pet", {
                 type,
                 name,
                 adoptionStatus,

@@ -65,13 +65,13 @@ export default function Cards(props) {
       }
     
     const tokenRes = await Axios.post(
-      "http://localhost:5000/users/tokenIsValid",
+      "https://pets-app-server-nodejs.herokuapp.com/users/tokenIsValid",
       null,
       { headers: { "x-auth-token": token } }
     );
     if (tokenRes.data) {
       const userRes = await Axios.delete(
-        `http://localhost:5000/pets/pet/${props.value.id}/delete`,
+        `https://pets-app-server-nodejs.herokuapp.com/pets/pet/${props.value.id}/delete`,
       
       { headers: { "x-auth-token": token } }
     );
@@ -115,8 +115,10 @@ export default function Cards(props) {
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            This impressive paella is a perfect party dish and a fun meal to cook together with your
-            guests. Add 1 cup of frozen peas along with the mussels, if you like.
+            This is a short description For a full description please click on the arrow below.<br/> <br/>
+            Short Description : <br/>
+            Type : {props.value.type} <br/> 
+            Color : {props.value.color}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>

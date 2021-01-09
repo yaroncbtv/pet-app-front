@@ -12,7 +12,7 @@ export default function HomePage() {
     
     useEffect(() => {
         const petsData = async () => {
-            const petsRes = await Axios.get("http://localhost:5000/pets/get-pet", {
+            const petsRes = await Axios.get("https://pets-app-server-nodejs.herokuapp.com/pets/get-pet", {
             });
             
             await setPetsRes(petsRes.data)
@@ -25,7 +25,7 @@ export default function HomePage() {
       useEffect(() => {
         
             const petsData = async () => {
-                const petsRes = await Axios.get(`http://localhost:5000/pets/pet-search/${global.pets}`, {
+                const petsRes = await Axios.get(`https://pets-app-server-nodejs.herokuapp.com/pets/pet-search/${global.pets}`, {
                 });
                 
                 await setPetsRes(petsRes.data)
@@ -36,7 +36,7 @@ export default function HomePage() {
                  
                  else{
                     const petsData2 = async () => {
-                        const petsRes = await Axios.get("http://localhost:5000/pets/get-pet", {
+                        const petsRes = await Axios.get("https://pets-app-server-nodejs.herokuapp.com/pets/get-pet", {
                         });
                         
                         await setPetsRes(petsRes.data)

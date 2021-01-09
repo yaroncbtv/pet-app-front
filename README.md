@@ -4,14 +4,6 @@
 
 - Link to my publish Full Stack App (Front End): (https://pets-app.netlify.app/)
 
-## NOTE For Login System
-
-     Login as User : just signup
-     
-     Login as Admin :
-     Email: Admin@Admin.com
-     Password: Admin
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

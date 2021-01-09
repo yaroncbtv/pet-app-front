@@ -78,12 +78,12 @@ export default function ProfileSettings() {
         token = "";
       }
       const tokenRes = await Axios.post(
-        "http://localhost:5000/users/tokenIsValid",
+        "https://pets-app-server-nodejs.herokuapp.com/users/tokenIsValid",
         null,
         { headers: { "x-auth-token": token } }
       );
       if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:5000/users/profilesettings", {
+        const userRes = await Axios.get("https://pets-app-server-nodejs.herokuapp.com/users/profilesettings", {
           headers: { "x-auth-token": token },
         }); 
         setUserData({
@@ -105,7 +105,7 @@ export default function ProfileSettings() {
     try {
       const loginUser = { email, displayName, lastName, phone };
       const loginRes = await Axios.post(
-        "http://localhost:5000/users/update",
+        "https://pets-app-server-nodejs.herokuapp.com/users/update",
         loginUser
       );
     } catch (err) {
